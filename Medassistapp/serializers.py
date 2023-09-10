@@ -1,16 +1,28 @@
 from rest_framework import serializers 
 from Medassistapp.models import  Category
+from Medassistapp.models import  Questions
+from Medassistapp.models import  SubQuestions
 from Medassistapp.models import  States
 from Medassistapp.models import  City
 from Medassistapp.models import  Doctors
-from Medassistapp.models import Timings
+from Medassistapp.models import  Timings
+from Medassistapp.models import  Users
 class CategorySerializer(serializers.ModelSerializer):
  
     class Meta:
         model = Category
         fields = "__all__"
-class StateSerializer(serializers.ModelSerializer):
         
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Questions
+        fields = "__all__"
+class SubQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= SubQuestions
+        fields = "__all__"
+
+class StateSerializer(serializers.ModelSerializer):        
     class Meta:
         model = States
         fields = "__all__"
@@ -44,3 +56,8 @@ class TimingsGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Timings
         fields= "__all__"
+        
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Users
+        fields="__all__"
