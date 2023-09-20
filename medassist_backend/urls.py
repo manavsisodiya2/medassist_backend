@@ -17,8 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from Medassistapp import statecity
 from Medassistapp import category
-from Medassistapp import users
-from Medassistapp import doctor,timings,question
+from Medassistapp import patient
+from Medassistapp import question
+from Medassistapp import doctor,timings
 from django.urls import include, re_path
 
 urlpatterns = [
@@ -27,7 +28,7 @@ urlpatterns = [
     re_path(r'^api/citylist', statecity.City_List),
     re_path(r'^api/categorylist', category.Category_List),
     re_path(r'^api/doctorsubmit', doctor.Submit_Doctor),
-    re_path(r'^api/usersubmit', users.Submit_User),
+    re_path(r'^api/usersubmit', patient.Submit_Patient),
     re_path(r'^api/doctoredit', doctor.Edit_Doctor),
     re_path(r'^api/doctordelete', doctor.Delete_Doctor),
     re_path(r'^api/doctorpictureedit', doctor.Edit_Picture),

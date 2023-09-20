@@ -6,12 +6,7 @@ class Category(models.Model):
     categoryname = models.CharField(max_length=100, blank=False, default='')
     description= models.CharField(max_length=250,blank=False, default='')
     icon = models.CharField(max_length=200,blank=False, default='')
-class Questions(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    question = models.CharField(max_length=300,blank=True,default='')
-class SubQuestions(models.Model):
-    question = models.ForeignKey(Questions, on_delete=models.CASCADE)
-    subquestions=models.CharField(max_length=300,blank=True,default='')
+
 
 class States(models.Model):
     statename = models.CharField(max_length=100, blank=False, default='')
@@ -41,13 +36,25 @@ class Timings(models.Model):
     endtimings = models.CharField(max_length=100, blank=False, default='')   
     days = models.CharField(max_length=200, blank=False, default='')
     status = models.CharField(max_length=45, blank=False, default='')
+class Questions(models.Model):
+    doctor=models.ForeignKey(Doctors,on_delete=models.CASCADE)
+    category=models.ForeignKey(Category,on_delete=models.CASCADE)
+    questionnumber=models.CharField(max_length=200,blank=False,default='')
+    question=models.CharField(max_length=200,blank=False,default='')
+class SubQuestions(models.Model):
+    doctor=models.ForeignKey(Doctors,on_delete=models.CASCADE)
+    category=models.ForeignKey(Category,on_delete=models.CASCADE)
+    question=models.ForeignKey(Questions,on_delete=models.CASCADE)
+    subquestionnumber=models.CharField(max_length=200,blank=False,default='')
+    subquestion=models.CharField(max_length=200,blank=False,default='')
  
-class Users(models.Model):
-    username=models.CharField(max_length=100, blank=False, default='')
-    emailid = models.CharField(max_length=150, blank=False, default='')
-    mobileno = models.CharField(max_length=100, blank=False, default='')
-    dob = models.CharField(max_length=25, blank=False, default='')
-    password = models.CharField(max_length=100, blank=False, default='')
-    gender = models.CharField(max_length=10, blank=False, default='')
+class Patient(models.Model):
+    username=models.CharField(max_length=200,blank=False,default='')
+    city=models.CharField(max_length=200,blank=True,default='')
+    gender=models.CharField(max_length=200,blank=False,default='')
+    emailid=models.CharField(max_length=200,primary_key=True)
+    dob=models.CharField(max_length=200,blank=False,default='')
+    mobileno=models.CharField(max_length=200,blank=False,default='')
+    password=models.CharField(max_length=200,blank=False,default='') 
 
 

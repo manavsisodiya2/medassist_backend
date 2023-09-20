@@ -4,8 +4,8 @@ from rest_framework import status
 from django.shortcuts import render
 
 
-from  Medassistapp.models import Users
-from  Medassistapp.serializers import UserSerializer
+from  Medassistapp.models import Patient
+from  Medassistapp.serializers import PatientSerializer
 # from  Medassistapp.serializers import UserGetSerializer
 
 from rest_framework.decorators import api_view
@@ -19,15 +19,15 @@ from rest_framework.decorators import api_view
 #  return JsonResponse({},safe=False) 
 
 @api_view(['GET', 'POST', 'DELETE'])
-def Submit_User(request):
+def Submit_Patient(request):
   
  try:
    if request.method=='POST':
-    User_serializer=UserSerializer(data=request.data)
+    Patient_serializer=PatientSerializer(data=request.data)
     # print(doctor_serializer,doctor_serializer.is_valid(),request.data)
-    if(User_serializer.is_valid()):
+    if(Patient_serializer.is_valid()):
       print("1")
-      User_serializer.save()
+      Patient_serializer.save()
       return JsonResponse({"message":'User Submitted Successfully',"status":True},safe=False)
     else:
       return JsonResponse({"message":'Fail to  submit User',"status":False},safe=False) 
