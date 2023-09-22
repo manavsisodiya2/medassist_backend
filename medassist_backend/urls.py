@@ -18,7 +18,8 @@ from django.urls import path
 from Medassistapp import statecity
 from Medassistapp import category
 from Medassistapp import patient
-from Medassistapp import question
+from Medassistapp import questions
+from Medassistapp import subquestions
 from Medassistapp import doctor,timings
 from django.urls import include, re_path
 
@@ -37,7 +38,10 @@ urlpatterns = [
     re_path(r'^api/deletetimings',timings.DeleteTimings),
     re_path(r'^api/timingsubmit',timings.TimingSubmit),
     re_path(r'^api/dtiminglist',timings.TimingList),
-    re_path(r'^api/dquestionlist',question.Question_List),
+    re_path(r'^api/questionlist',questions.QuestionList),
+    re_path(r'^api/questionsubmit',questions.QuestionSubmit),
+    re_path(r'^api/subquestionsubmit',subquestions.SubQuestionsSubmit),
+
 
 
 ]

@@ -51,12 +51,25 @@ class TimingsGetSerializer(serializers.ModelSerializer):
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
-        model= Questions
-        fields = "__all__"
-class SubQuestionSerializer(serializers.ModelSerializer):
+        model=Questions
+        fields="__all__"
+class QuestionGetSerializer(serializers.ModelSerializer):
+    category=CategorySerializer(many=False)
+    doctor=DoctorSerializer(many=False)
     class Meta:
-        model= SubQuestions
-        fields = "__all__"
+        model=Questions
+        fields="__all__"
+class SubQuestionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=SubQuestions
+        fields="__all__"
+class SubQuestionsGetSerializer(serializers.ModelSerializer):
+    category=CategorySerializer(many=False)
+    question=QuestionSerializer(many=False)
+    doctor=DoctorSerializer(many=False)
+    class Meta:
+        model=SubQuestions
+        fields="__all__"
         
 class PatientSerializer(serializers.ModelSerializer):
     
