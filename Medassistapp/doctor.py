@@ -10,7 +10,13 @@ from  Medassistapp.models import Doctors
 from  Medassistapp.serializers import DoctorSerializer
 from  Medassistapp.serializers import DoctorGetSerializer
 
+from Medassistapp.models import Questions
+from Medassistapp.serializers import QuestionSerializer
+from Medassistapp.serializers import QuestionGetSerializer
 
+from Medassistapp.models import SubQuestions
+from Medassistapp.serializers import SubQuestionsGetSerializer
+from Medassistapp.serializers import SubQuestionsSerializer
 
 from rest_framework.decorators import api_view
 
@@ -94,3 +100,34 @@ def Edit_Picture(request):
  except Exception as e:
     print("Error Picture:",e)
     return JsonResponse({"message":'Fail to edit  doctor image',"status":False},safe=False) 
+@api_view(['GET', 'POST', 'DELETE'])
+def Doctor_Login(request):
+  if request.method=='POST':
+  
+    email=request.data['emailid']
+    pwd=request.data['password']
+    doctor=Doctors.objects.all().filter(emailid=email,password=pwd)
+     
+    doctor_serializer = DoctorSerializer(doctor,many=True)
+    if(len(doctor_serializer.data)==1):
+     return JsonResponse({"data":doctor_serializer.data,"status":True },safe=False)
+    else:
+     return JsonResponse({"data":[],"status":False },safe=False)  
+       
+  return JsonResponse({"data":{},"status":False },safe=False) 
+   
+
+@api_view(['GET', 'POST', 'DELETE'])
+def Doctor_Questions(request):
+   if request.method=='POST':
+     print('xxxxxxxxxxxxxxxxxx',request.data['doctorid'])
+     doctorid=request.data['doctorid']
+     questions=SubQuestions.objects.all().filter(doctor_id=doctorid)
+     questions_serializer = SubQuestionsGetSerializer(questions,many=True)
+     print(questions_serializer.data)
+     return JsonResponse({"data":questions_serializer.data,"status":True },safe=False)
+   else:
+     return JsonResponse({"data":[],"status":False },safe=False)  
+  
+
+

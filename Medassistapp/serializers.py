@@ -1,20 +1,19 @@
 from rest_framework import serializers 
 from Medassistapp.models import  Category
-from Medassistapp.models import  Questions
-from Medassistapp.models import  SubQuestions
 from Medassistapp.models import  States
 from Medassistapp.models import  City
 from Medassistapp.models import  Doctors
-from Medassistapp.models import  Timings
-from Medassistapp.models import  Patient
+from Medassistapp.models import Timings
+from Medassistapp.models import Questions,SubQuestions,Patient
+from Medassistapp.models import Answers
+from Medassistapp.models import Prescription
 class CategorySerializer(serializers.ModelSerializer):
  
     class Meta:
         model = Category
         fields = "__all__"
+class StateSerializer(serializers.ModelSerializer):
         
-
-class StateSerializer(serializers.ModelSerializer):        
     class Meta:
         model = States
         fields = "__all__"
@@ -48,7 +47,6 @@ class TimingsGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Timings
         fields= "__all__"
-
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model=Questions
@@ -70,9 +68,29 @@ class SubQuestionsGetSerializer(serializers.ModelSerializer):
     class Meta:
         model=SubQuestions
         fields="__all__"
-        
 class PatientSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model=Patient
         fields="__all__"
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Answers
+        fields="__all__"
+class AnswerGetSerializer(serializers.ModelSerializer):
+    patient=PatientSerializer(many=False)
+    doctor=DoctorSerializer(many=False)
+    class Meta:
+        model=Answers
+        fields="__all__"                
+
+        
+class PrescriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Prescription
+        fields="__all__"         
+class PrescriptionGetSerializer(serializers.ModelSerializer):
+    patient=PatientSerializer(many=False)
+    doctor=DoctorSerializer(many=False)
+    class Meta:
+        model=Prescription
+        fields="__all__"          

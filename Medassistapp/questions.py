@@ -16,8 +16,6 @@ def QuestionList(request):
     except Exception as error:
         print("xxxxxxxxxx",error)
         return JsonResponse({},safe=False)
-    
-    
 @api_view(['Get','POST','DELETE'])
 def QuestionSubmit(request):
     try:
